@@ -7,7 +7,6 @@ public class ToDoList {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        before:
         while (true) {
             System.out.println("Выберите опцию: " +
                     "\n1. Добавить задачу " +
@@ -22,18 +21,18 @@ public class ToDoList {
                     break;
                 case 2:
                     showTask();
+                    System.out.println();
                     break;
                 case 3:
                     deleteTask();
                     break;
                 case 4:
-                    break before;
+                    break ;
                 default:
                     System.out.println("Неправильно задана опция, попробуйте еще раз");
                     break;
             }
         }
-
     }
 
     public static void addTask(List<String> list) {
@@ -41,8 +40,8 @@ public class ToDoList {
             System.out.println("Введите название задачи (для завершение введите end)");
             Scanner scanner = new Scanner(System.in);
             String task = scanner.nextLine();
-            System.out.println("Ваша задача добавлена");
             if ("end".equalsIgnoreCase(task)) {
+                System.out.println("Вы вышли из опции");
                 break;
             } else {
                 list.add(task);
@@ -56,12 +55,9 @@ public class ToDoList {
             System.out.println(i + 1 + " " + list.get(i));
         }
     }
-
     public static void deleteTask() {
-        System.out.println("Удалите задачу: ");
+        System.out.println("Нажмите один из индексов, чтобы удалить задачу");
         int position = Integer.parseInt(scanner.nextLine());
         list.remove(position - 1);
     }
-
 }
-
