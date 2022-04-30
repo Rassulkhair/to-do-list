@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class NoteBook {
+public class ToDoList {
     private static final List<String> list = new ArrayList<>();
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -41,6 +41,7 @@ public class NoteBook {
             System.out.println("Введите название задачи (для завершение введите end)");
             Scanner scanner = new Scanner(System.in);
             String task = scanner.nextLine();
+            System.out.println("Ваша задача добавлена");
             if ("end".equalsIgnoreCase(task)) {
                 break;
             } else {
