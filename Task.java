@@ -1,63 +1,48 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class ToDoList {
-    private static final List<String> list = new ArrayList<>();
-    private static final Scanner scanner = new Scanner(System.in);
-
+public class Main {
     public static void main(String[] args) {
-        while (true) {
-            System.out.println("Выберите опцию: " +
-                    "\n1. Добавить задачу " +
-                    "\n2. Показать все задачи " +
-                    "\n3. Удалить задачу " +
-                    "\n4. Выйти из системы");
-            Scanner scanner = new Scanner(System.in);
-            int task = scanner.nextInt();
-            switch (task) {
-                case 1:
-                    addTask(list);
-                    break;
-                case 2:
-                    showTask();
-                    System.out.println();
-                    break;
-                case 3:
-                    deleteTask();
-                    break;
-                case 4:
-                    break ;
-                default:
-                    System.out.println("Неправильно задана опция, попробуйте еще раз");
-                    break;
-            }
-        }
-    }
+        ArrayList<String> result = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
 
-    public static void addTask(List<String> list) {
         while (true) {
-            System.out.println("Введите название задачи (для завершение введите end)");
-            Scanner scanner = new Scanner(System.in);
-            String task = scanner.nextLine();
-            if ("end".equalsIgnoreCase(task)) {
-                System.out.println("Вы вышли из опции");
+            System.out.println("""
+                    Выберите действие:\s
+                    1. Добавить задачу\s
+                    2. Вывести список задач
+                    3. Удалить задачу
+                    0. Выход""");
+            String message = scanner.nextLine();
+
+            switch (Integer.parseInt(message)) {
+                case 1 -> {
+                    System.out.println("Введите задачу для планирования:");
+                    String task = scanner.nextLine();
+                    result.add(task);
+                }
+                case 2 -> {
+                    System.out.println("Список задач:");
+                    int counter = 0;
+                    for (String task : result) {
+                        counter++;
+                        System.out.println(counter + ". " + task);
+                    }
+                }
+                case 3 -> {
+                    while (true) {
+                        System.out.println("Выберите какую задачу удалить или введите finish: ");
+                        String index = scanner.nextLine();
+                        if (index.equalsIgnoreCase("finish")) {
+                            break;
+                        }
+                        result.remove(Integer.parseInt(index) - 1);
+                    }
+                }
+            }
+            if (Integer.parseInt(message) == 0) {
                 break;
-            } else {
-                list.add(task);
             }
         }
-    }
-
-    private static void showTask() {
-        System.out.println("Список задач:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(i + 1 + " " + list.get(i));
-        }
-    }
-    public static void deleteTask() {
-        System.out.println("Нажмите один из индексов, чтобы удалить задачу");
-        int position = Integer.parseInt(scanner.nextLine());
-        list.remove(position - 1);
     }
 }
